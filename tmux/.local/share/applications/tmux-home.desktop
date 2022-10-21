@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Tmux Home
+Comment=Open / Create Tmux Home Session
+GenericName=Tmux Home
+Exec=xfce4-terminal --maximize -x tmux-home
+Icon=org.xfce.terminal
+Type=Application
+Categories=Development;TerminalEmulator;

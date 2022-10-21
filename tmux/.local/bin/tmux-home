@@ -1,0 +1,12 @@
+if ! tmux has-session -t $USER; then
+  tmux new -s $USER -d
+  tmux rename-window -t $USER home
+  tmux split-window -t $USER -h -p 30
+  #tmux clock-mode -t $USER:0.1
+  #tmux split-window -t $USER -v -p 80
+  tmux send-keys -t $USER:1.1 \
+		'cat $HOME/.local/tmux_cheatsheet' Enter
+  tmux send-keys -t $USER:1.0 'neofetch --ascii_distro Xubuntu' Enter
+  tmux select-pane -t $USER:1.0
+fi
+tmux a -t $USER

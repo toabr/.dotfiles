@@ -1,0 +1,29 @@
+         appfinder - Alt+F2
+         appfinder - Alt+F3
+         close WIN - Alt+F4
+         stick WIN - Alt+F6
+          move WIN - Alt+F7
+        resize WIN - Alt+F8
+        fullscreen - Alt+F11
+             above - Alt+F12
+
+     Cycle Windows - Alt+Tab
+    Left Workspace - Ctrl+Alt+Left
+   Right Workspace - Ctrl+Alt+Right
+     Add Workspace - Alt+Insert
+  Delete Workspace - Alt+Delete
+
+         Tile Left - Super+Left
+        Tile Right - Super+Right
+          Maximize - Super+Up
+              Hide - Super+Down
+   Move To Left WS - Shift+Ctrl+Alt+Right
+  Move To Right WS - Shift+Ctrl+Alt+Right
+
+      Show Desktop - Ctrl+Alt+d
+       Whiskermenu - Super+space
+       Lock Screen - Ctrl+Alt+Delete
+        Screenshot - Print
+          Terminal - Ctrl+Alt+t
+           Display - Super+p
+ 

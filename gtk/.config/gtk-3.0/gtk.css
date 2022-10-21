@@ -1,0 +1,9 @@
+/* Rounded edges for panel https://forum.xfce.org/viewtopic.php?id=15163 */
+.xfce4-panel.horizontal{
+    border-radius: 15px;
+}
+
+/* xfce4-terminal window borders padding */
+VteTerminal, vte-terminal {
+    padding: 18px;
+}

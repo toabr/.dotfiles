@@ -1,0 +1,8 @@
+#!/bin/bash
+killall conky;
+conky -q -c ~/.config/conky/system.conf &
+conky -q -c ~/.config/conky/network.conf &
+conky -q -c ~/.config/conky/clock.conf &
+conky -q -c ~/.config/conky/disks.conf &
+conky -q -c ~/.config/conky/shortcuts.conf &
+exit

@@ -1,0 +1,66 @@
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# vim editor
+alias e=nvim
+alias v=nvim
+alias vi=nvim
+alias vim=nvim
+
+# navigation
+alias ~="cd ~"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias c="clear"
+alias ll='ls -alFh'
+alias la='ls -A'
+alias l='ls -CF'
+
+# force zsh to show the complete history
+alias history="history 0"
+alias h='history'
+alias hs='history | grep'
+alias histg='history | grep'
+alias hsi='history | grep -i'
+
+# shortcuts
+alias config='cd ~/.dotfiles'
+alias cat='batcat'
+#alias nano='nano -wa -$ -iT 2'
+alias find.='find . -xdev -maxdepth 3 -iname'
+alias dspace='df -h --output=source,fstype,size,used,avail,pcent,target -x tmpfs -x devtmpfs'
+alias dus='du -sh'
+alias dud='du -h -d 1'
+
+# confirmation
+alias mkdir='mkdir -pv'
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# reboot / halt / poweroff
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown'
+
+## pass options to free ##
+alias meminfo='free -m -l -t'
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+
+# fun
+alias matrix='cmatrix -ab -C red -u 10'
+
+# cht.sh
+alias cheat='cht.sh'
+
+# Virtualbox VMs
+# alias docker-start='VBoxManage startvm docker --type=headless'

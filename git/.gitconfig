@@ -1,0 +1,18 @@
+[user]
+	email = 25079664+toabr@users.noreply.github.com
+	name  = toabr
+[alias]
+  st   = status
+  cm   = !git commit -m
+  acm  = !git add . && git commit -m
+  co   = checkout
+  cob  = checkout -b
+  del  = branch -D
+  br   = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+  cam  = commit -a -m
+  save = !git add -A && git commit -m 'chore: savepoint'
+  undo = reset HEAD~1 --mixed
+  res  = !git reset --hard
+  done = !git push origin HEAD
+  ls   = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+	last = log -1 HEAD --stat

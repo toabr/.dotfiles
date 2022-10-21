@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+
+    bold='';
+    reset="\033[0m";
+    black="\033[1;30m";
+    blue="\033[1;34m";
+    cyan="\033[1;36m";
+    green="\033[1;32m";
+    orange="\033[1;33m";
+    purple="\033[1;35m";
+    red="\033[1;31m";
+    violet="\033[1;35m";
+    white="\033[0;37m";
+    yellow="\033[1;33m";
+
+    # Highlight the user name when logged in as root.
+    if [[ "${USER}" == "root" ]]; then
+        userStyle="${red}";
+    else
+        userStyle="${green}";
+    fi;
+
+    # Highlight the hostname when connected via SSH.
+    if [[ "${SSH_TTY}" ]]; then
+        hostStyle="${red}";
+    else
+        hostStyle="${green}";
+    fi;
+
+    PS1="\n"; # newline
+    PS1+="${debian_chroot:+($debian_chroot)}";
+    PS1+="\[${white}\]\A "; # time
+    PS1+="\[${userStyle}\]\u"; # user
+    PS1+="\[${white}\]@"; # @
+    PS1+="\[${hostStyle}\]\h \[${blue}\]"; # host
+    PS1+='${PWD#"${PWD%/*/*/*}/"}'; # last 3 directorys in path
+
+    # git-prompt feature
+    if [ -f $HOME/.local/bin/git-prompt.sh ]; then
+        . $HOME/.local/bin/git-prompt.sh
+        
+        GIT_PS1_STATESEPARATOR=
+        GIT_PS1_SHOWDIRTYSTATE=1
+        GIT_PS1_SHOWUNTRACKEDFILES=1
+        GIT_PS1_SHOWSTASHSTATE=
+        GIT_PS1_SHOWUPSTREAM=
+        GIT_PS1_SHOWCOLORHINTS=
+
+        PS1+="\[${white}\]";
+        PS1+='$(__git_ps1 " [git: %s]")'; # Git repository details
+    fi
+
+    PS1+="\n";
+    PS1+="\[${blue}\]└─";
+    PS1+="\[${reset}\]\$ "; # `$` (and reset color)
+    export PS1
+
+else
+    PS1="${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
+    ;;
+*)
+    ;;
+esac
