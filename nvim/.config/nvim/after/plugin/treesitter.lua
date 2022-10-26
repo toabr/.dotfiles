@@ -1,19 +1,20 @@
 -- nvim-treesitter/nvim-treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "lua", "javascript" }, -- A list of parser names, or "all"
+  ensure_installed = "all", -- A list of parser names, or "all"
+  sync_install = false,
 	ignore_install = { "" }, -- List of parsers to ignore installing
 
   highlight = {
     enable = true, -- false will disable the whole extension
-		disable = { "css" }, -- list of language that will be disabled
-    -- additional_vim_regex_highlighting = false,
+		disable = "", -- list of language that will be disabled
+    additional_vim_regex_highlighting = true,
   },
-	-- indent = { enable = true, disable = { "python", "css" } },
+	indent = { enable = true, disable = { "yaml" } },
 	autopairs = {
 		enable = true,
 	},
   rainbow = {
-    enable = true,
+    enable = false,
     -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
     extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
     max_file_lines = nil, -- Do not enable for files with more than n lines, int
