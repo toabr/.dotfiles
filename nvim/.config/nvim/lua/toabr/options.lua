@@ -39,6 +39,9 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+-- whitespace characters
+vim.opt.list = true
+vim.opt.listchars = 'lead:⸱'
 
 -- search
 vim.opt.ignorecase = true
