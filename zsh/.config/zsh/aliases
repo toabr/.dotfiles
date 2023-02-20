@@ -1,11 +1,11 @@
 # Enable aliases to be sudo’ed
-alias sudo='sudo '
+# alias sudo='sudo '
 
 # vim editor
-alias e=nvim
-alias v=nvim
-alias vi=nvim
-alias vim=nvim
+alias nvim="/opt/nvim-linux64/bin/nvim"
+# alias v=nvim
+# alias vi=nvim
+# alias vim=nvim
 
 # navigation
 alias ~="cd ~"
@@ -27,12 +27,10 @@ alias hsi='history | grep -i'
 
 # shortcuts
 alias config='cd ~/.dotfiles'
-alias cat='batcat'
-#alias nano='nano -wa -$ -iT 2'
 alias find.='find . -xdev -maxdepth 3 -iname'
 alias dspace='df -h --output=source,fstype,size,used,avail,pcent,target -x tmpfs -x devtmpfs'
 alias dus='du -sh'
-alias dud='du -h -d 1'
+alias dud='du -hd 1'
 
 # confirmation
 alias mkdir='mkdir -pv'
@@ -56,11 +54,11 @@ alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 
-# fun
+# third party stuff
+alias cat='batcat'
 alias matrix='cmatrix -ab -C red -u 10'
-
-# cht.sh
-alias cheat='cht.sh'
+# alias tldr='tldr -t base16'
+alias tldrf='tldr -l1 | fzf --preview "tldr {1}" --preview-window=right,70% | xargs tldr'
 
 # Virtualbox VMs
 # alias docker-start='VBoxManage startvm docker --type=headless'
