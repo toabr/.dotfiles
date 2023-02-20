@@ -1,0 +1,149 @@
+source $VIMRUNTIME/defaults.vim
+
+" --------------------
+" SOURCE VIMRC ON SAVE 
+" --------------------
+
+augroup vimrc
+  autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+  autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+augroup END
+
+" --------------------
+" BASIC SETTINGS
+" --------------------
+
+set encoding=utf-8      " The encoding displayed.
+set fileencoding=utf-8  " The encoding written to file.
+set hidden
+set noswapfile
+set undofile
+set undodir=$HOME/.vim/undo " needs to exist
+
+" style
+set termguicolors
+" curl -LO https://raw.githubusercontent.com/ghifarit53/tokyonight-vim/master/colors/tokyonight.vim ~/.vim/colors
+colorscheme tokyonight
+set laststatus=2
+set number
+set relativenumber
+set signcolumn=yes   
+set listchars+=tab:→\ ,
+set listchars+=space:⸱,
+set listchars+=nbsp:␣,
+set listchars+=eol:↲,
+set listchars+=precedes:←,
+set listchars+=extends:→,
+
+set splitright
+set splitbelow
+
+" indent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nowrap
+
+" search
+"set path+=**        " include subdirectorys
+set wildmenu
+set wildmode=list:full
+set wildignorecase   " ignore case for completion
+set wildignore=node_modules/**,.git/**
+set ignorecase
+set smartcase
+set hlsearch
+set showmatch
+
+" --------------------
+" STATUS LINE
+" --------------------
+
+"function! InsertStatuslineColor(mode)
+"  if a:mode == 'i'
+"    hi statusline ctermfg=6 ctermbg=0
+"  elseif a:mode == 'r'
+"    hi statusline ctermfg=5 ctermbg=0
+"  else
+"    hi statusline ctermfg=1 ctermbg=0
+"  endif
+"endfunction
+"
+"au InsertEnter * call InsertStatuslineColor(v:insertmode)
+"au InsertLeave * hi statusline ctermfg=8 ctermbg=0
+"
+"" default the statusline when entering Vim
+"hi statusline ctermfg=8 ctermbg=0
+"
+"" hl-user
+"hi User1 ctermfg=8  ctermbg=234
+
+" status
+set statusline=%0*                " hl-user
+let mybuflisted = {'buflisted':1}
+set statusline+=[%n\/\%{len(getbufinfo(mybuflisted))}] " buffer
+set statusline+=\ %f\             " file name
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}]           " file format
+set statusline+=%y                " filetype
+set statusline+=%h                " help file flag
+set statusline+=%m                " modified flag
+set statusline+=%r                " read only flag
+set statusline+=\ %=              " align left
+set statusline+=%1*               " hl-user
+set statusline+=\ C:%c            " current column
+set statusline+=\ L:%l/%L\ [%p%%] " line X of Y [%]
+
+" --------------------
+" NETRW FILE BROWSER
+" --------------------
+
+let g:netrw_browse_split=0
+let g:netrw_keepdir=1
+let g:netrw_banner=0
+let g:netrw_liststyle= 3
+let g:netrw_winsize=-30
+let g:netrw_localcopydircmd='cp -r'
+
+" wipeout netrw buffers when they are hidden
+augroup AutoDeleteNetrwHiddenBuffers
+  au!
+  au FileType netrw setlocal bufhidden=wipe
+augroup end
+
+" --------------------
+" KEY MAPPING
+" --------------------
+
+let mapleader="\<Space>"
+" open file explorer
+nnoremap <Leader>e :Lexplore<CR>
+" open terminal
+nnoremap <Leader>t :term<CR>
+" disables search highlighting
+nnoremap <Leader>h :nohlsearch<CR>
+" save & quit
+nnoremap <Leader>w :write!<CR>
+nnoremap <Leader>q :quit!<CR>
+" buffer
+nnoremap <Leader>b :ls<CR>
+nnoremap <Leader>c :bdelete!<CR>
+" undo redo
+nnoremap <C-Z> u
+nnoremap <C-Y> <C-R>
+inoremap <C-Z> <C-O>u
+inoremap <C-Y> <C-O><C-R>
+" windows
+nnoremap <Leader>v :vsplit<CR>
+nnoremap <C-Left> :vertical resize -2<CR>
+nnoremap <C-Right> :vertical resize +2<CR>
+nnoremap <C-Up> :resize -2<CR>
+nnoremap <C-Down> :resize +2<CR>
+
+" regex completion instead of whole word completion
+nnoremap <leader>f :find **/*
+" restrict the matching to files under the directory
+" of the current file, recursively
+nnoremap <leader>F :find <C-R>=expand('%:p:h').'/**/*'<CR>
