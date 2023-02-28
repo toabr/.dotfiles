@@ -1,0 +1,10 @@
+# NeoVim
+
+Requiremants:
+- ...
+
+Plugins:
+- ...
+
+Install:
+- ...
