@@ -65,7 +65,8 @@ return packer.startup(function(use)
     use 'navarasu/onedark.nvim'
     use 'folke/tokyonight.nvim'
     use 'catppuccin/nvim'
-    use 'toabr/everforest'
+    -- use 'sainnhe/everforest'
+    use '/home/c3to/Desktop/everforest'
 
     -- cmp ----------------------------------
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
