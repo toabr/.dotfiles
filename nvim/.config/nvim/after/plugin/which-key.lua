@@ -26,6 +26,7 @@ local mappings = {
     ["<leader>b"] = { name = "[b]uffer"},
     ["<leader>f"] = { name = "[f]ind" },
     ["<leader>g"] = { name = "[g]it" },
+    ["<leader>gh"] = { name = "[h]unk" },
     ["<leader>l"] = { name = "[l]sp" },
     ["<leader>q"] = { name = "[q]uit" },
     ["<leader>s"] = { name = "[s]earch" },
