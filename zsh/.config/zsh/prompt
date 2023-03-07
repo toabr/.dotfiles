@@ -62,14 +62,14 @@ configure_prompt() {
 
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PROMPT=$'%F{reset}%* ' # time
+            PROMPT=$'%F{white}%* ' # time
             PROMPT+=$'%F{%(#.blue.green)}${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}'
             PROMPT+=$'%B%F{%(#.red.$host_style)}%n' # username
             PROMPT+=$'%F{white}$prompt_symbol' # seperator
             PROMPT+=$'%F{%(#.red.$host_style)}%m ' # hostname
-            PROMPT+=$'%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b ' # path
+            PROMPT+=$'%B%F{blue}%(6~.%-1~/…/%4~.%5~)%b ' # path
             PROMPT+=$'$(git_super_status) ' # git prompt        
-            PROMPT+=$'\n%b%F{green}└─ %B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+            PROMPT+=$'\n%b%F{green}└─%B%(#.%F{red}#.%F{green}$)%b%F{reset} '
 
             RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;

@@ -1,43 +1,38 @@
-# Enable aliases to be sudo’ed
-# alias sudo='sudo '
-
 # vim editor
 alias nvim="/opt/nvim-linux64/bin/nvim"
-# alias v=nvim
-# alias vi=nvim
-# alias vim=nvim
 
 # navigation
 alias ~="cd ~"
+alias -- -="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias c="clear"
-alias ll='ls -alFh'
-alias la='ls -A'
-alias l='ls -CF'
 
-# force zsh to show the complete history
-alias history="history 0"
-alias h='history'
-alias hs='history | grep'
-alias histg='history | grep'
-alias hsi='history | grep -i'
+# list
+alias l='ls -F1 --group-directories-first'
+alias la='ls -FA'
+alias ll='ls -Fahl'
+alias dot='cd ~/.dotfiles'
 
-# shortcuts
-alias config='cd ~/.dotfiles'
-alias find.='find . -xdev -maxdepth 3 -iname'
-alias dspace='df -h --output=source,fstype,size,used,avail,pcent,target -x tmpfs -x devtmpfs'
-alias dus='du -sh'
+# disk space
+alias dfh='df -h --output=source,fstype,size,used,avail,pcent,target -x tmpfs -x devtmpfs'
+alias dus='du -hs'
 alias dud='du -hd 1'
+
+# search
+alias f.='find . -maxdepth 5 -type f -iname'
+# G pipe grep
+alias -g G=' | grep -i '
+# complete history
+alias h='history 0'
 
 # confirmation
 alias mkdir='mkdir -pv'
 alias rm='rm -i'
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
+alias mv='mv -iv'
+alias cp='cp -iv'
+alias ln='ln -iv'
 
 # reboot / halt / poweroff
 alias reboot='sudo /sbin/reboot'
@@ -56,6 +51,7 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 
 # third party stuff
 alias cat='batcat'
+alias fd='fdfind'
 alias matrix='cmatrix -ab -C red -u 10'
 # alias tldr='tldr -t base16'
 alias tldrf='tldr -l1 | fzf --preview "tldr {1}" --preview-window=right,70% | xargs tldr'
