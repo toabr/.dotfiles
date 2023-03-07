@@ -34,7 +34,7 @@ local mappings = {
     ["<leader>u"] = { name = "[u]i/toggle" },
     ["<leader>w"] = { name = "[w]indow" },
     ["<leader>x"] = { name = "fi[x]" },
-    ["<leader>y"] = { name = "[y]ank" },
+    ["<leader><leader>"] = { name = "special" },
 }
 
 which_key.setup(setup)

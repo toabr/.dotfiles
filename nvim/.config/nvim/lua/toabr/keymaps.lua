@@ -44,16 +44,22 @@ map("v", "p", '"_dP', opts)
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
 -- serch word under cursor
-map("n", "gw", "*N")
-map("x", "gw", "*N")
+map("n", "gw", "*N", { desc = "search [w]ord under cursor" })
+map("x", "gw", "*N", { desc = "search [w]ord under cursor" })
 
--- stay in indent mode
+-- stay in visual mode after indent
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
--- jump textblock with arrow keys
-map("n", "<C-Up>", "{", { desc = "jump textblock up" })
-map("n", "<C-Down>", "}", { desc = "jump text block down" })
+-- jump and center
+map("n", "<C-Up>", "{zz", { desc = "jump textblock up" })
+map("n", "<C-Down>", "}zz", { desc = "jump text block down" })
+
+map("n", "<S-Up>", "<S-Up>zz", { desc = "scroll page up" })
+map("n", "<S-Down>", "<S-Down>zz", { desc = "scroll page down" })
+
+map("n", "n", "nzz", { desc = "next hl" })
+map("n", "N", "Nzz", { desc = "prev hl" })
 
 -- Resize wibdow using <ctrl> arrow keys
 -- map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -75,19 +81,17 @@ map("n", "ä<cr>", ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { desc = "add
 
 -- LEADER --------------------------------------------------------------
 
---[[ FIXME: you will figure it out ]]
-map("n", "<leader><leader>x", "<cmd>w<cr><cmd>so%<cr>", { desc = "Save & Source" })
+-- find / files
 map("n", "<leader>fe", "<cmd>Lexplore<cr>", { desc = "[e]xplorer" })
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "[n]ew" })
-map("n", "<leader>xm", "<cmd>messages<cr>", { desc = "[m]essages list" })
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "[q]uit all" })
-map("n", "<leader>qQ", "<cmd>qa!<cr>", { desc = "[Q]uit all!" })
+
+-- window
 map("n", "<leader>ww", "<C-W>p", { desc = "s[w]itch" })
 map("n", "<leader>wq", "<C-W>c", { desc = "[q]uit" })
 map("n", "<leader>ws", "<C-W>s", { desc = "[s]plit" })
 map("n", "<leader>wv", "<C-W>v", { desc = "[v]ertical split" })
-map({"n", "v"}, "<leader>yy", [["+y]], { desc = "[y]ank to system" })
-map("n", "<leader>yY", [["+Y]], { desc = "[Y]ank line to system" })
+
+-- user interface
 map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "[d]ignostics"})
 map("n", "<leader>uR", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "[R]edraw" })
 map("n", "<leader>un", "<cmd>set number!<cr>", { desc = "[n]umbers" })
@@ -96,3 +100,11 @@ map("n", "<leader>uw", "<cmd>set wrap!<cr>", { desc = "[w]rap" })
 map("n", "<leader>ul", "<cmd>set list!<cr>", { desc = "[l]ist" })
 map("n", "<leader>uz", "<cmd>ZenMode<cr>", { desc = "[z]en" })
 
+map("n", "<leader>xm", "<cmd>messages<cr>", { desc = "[m]essages list" })
+
+map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "[q]uit all" })
+map("n", "<leader>qQ", "<cmd>qa!<cr>", { desc = "[Q]uit all!" })
+
+map({"n", "v"}, "<leader><leader>y", [["+y]], { desc = "[y]ank to system" })
+map("n", "<leader><leader>Y", [["+Y]], { desc = "[Y]ank line to system" })
+map("n", "<leader><leader>x", "<cmd>w<cr><cmd>so%<cr>", { desc = "Save & Source" })
