@@ -52,11 +52,11 @@ map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- jump and center
-map("n", "<C-Up>", "{zz", { desc = "jump textblock up" })
-map("n", "<C-Down>", "}zz", { desc = "jump text block down" })
+map("n", "<S-Up>", "{zz", { desc = "jump textblock up" })
+map("n", "<S-Down>", "}zz", { desc = "jump text block down" })
 
-map("n", "<S-Up>", "<S-Up>zz", { desc = "scroll page up" })
-map("n", "<S-Down>", "<S-Down>zz", { desc = "scroll page down" })
+map("n", "<C-Up>", "<C-u>zz", { desc = "scroll page up" })
+map("n", "<C-Down>", "<C-d>zz", { desc = "scroll page down" })
 
 map("n", "n", "nzz", { desc = "next hl" })
 map("n", "N", "Nzz", { desc = "prev hl" })

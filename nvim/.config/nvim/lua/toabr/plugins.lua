@@ -79,9 +79,9 @@ return packer.startup(function(use)
     use "rafamadriz/friendly-snippets" -- Snippets
 
     -- LSP client support -------------------
-    use "neovim/nvim-lspconfig"
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
+    use 'neovim/nvim-lspconfig'
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
 
     -- treesitter
     use 'nvim-treesitter/nvim-treesitter'
