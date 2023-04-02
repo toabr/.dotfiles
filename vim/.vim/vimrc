@@ -13,6 +13,7 @@ augroup END
 " BASIC SETTINGS
 " --------------------
 
+set mouse=a
 set encoding=utf-8      " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 set hidden
@@ -21,9 +22,8 @@ set undofile
 set undodir=$HOME/.vim/undo " needs to exist
 
 " style
+set background=dark
 set termguicolors
-" curl -LO https://raw.githubusercontent.com/ghifarit53/tokyonight-vim/master/colors/tokyonight.vim ~/.vim/colors
-colorscheme tokyonight
 set laststatus=2
 set number
 set relativenumber
@@ -92,9 +92,18 @@ set statusline+=%h                " help file flag
 set statusline+=%m                " modified flag
 set statusline+=%r                " read only flag
 set statusline+=\ %=              " align left
-set statusline+=%1*               " hl-user
+"set statusline+=%1*               " hl-user
 set statusline+=\ C:%c            " current column
 set statusline+=\ L:%l/%L\ [%p%%] " line X of Y [%]
+
+" --------------------
+" Colorscheme
+" --------------------
+
+" sainnhe/everforest
+let g:everforest_transparent_background = 2
+colorscheme everforest
+"hi StatusLine ctermfg=NONE
 
 " --------------------
 " NETRW FILE BROWSER
@@ -125,11 +134,11 @@ nnoremap <Leader>t :term<CR>
 " disables search highlighting
 nnoremap <Leader>h :nohlsearch<CR>
 " save & quit
-nnoremap <Leader>w :write!<CR>
-nnoremap <Leader>q :quit!<CR>
+nnoremap <Leader>w :write<CR>
+nnoremap <Leader>q :quit<CR>
 " buffer
 nnoremap <Leader>b :ls<CR>
-nnoremap <Leader>c :bdelete!<CR>
+nnoremap <Leader>c :bdelete<CR>
 " undo redo
 nnoremap <C-Z> u
 nnoremap <C-Y> <C-R>
@@ -147,3 +156,4 @@ nnoremap <leader>f :find **/*
 " restrict the matching to files under the directory
 " of the current file, recursively
 nnoremap <leader>F :find <C-R>=expand('%:p:h').'/**/*'<CR>
+
