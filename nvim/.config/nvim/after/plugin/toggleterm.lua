@@ -41,33 +41,41 @@ end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
-local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+-- enter terminal mode
+vim.keymap.set('n', '<leader>th', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', { desc = "[h]orizontal" })
+vim.keymap.set('n', '<leader>tv', '<cmd>ToggleTerm size=65 direction=vertical<cr>', { desc = "[v]ertical" })
+vim.keymap.set('n', '<leader>tt', "<cmd>ToggleTerm<cr>", { desc = "[t]erminal" })
 
+local Terminal = require("toggleterm.terminal").Terminal
+
+-- lazygit
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 function _LAZYGIT_TOGGLE()
     lazygit:toggle()
 end
 
-local node = Terminal:new({ cmd = "node", hidden = true })
+vim.keymap.set('n', '<leader>gg', function() _LAZYGIT_TOGGLE() end, { desc = "lazy[g]it" })
 
+-- node
+local node = Terminal:new({ cmd = "node", hidden = true })
 function _NODE_TOGGLE()
     node:toggle()
 end
 
+-- ncdu
 local ncdu = Terminal:new({ cmd = "ncdu", hidden = true })
-
 function _NCDU_TOGGLE()
     ncdu:toggle()
 end
 
+-- htop
 local htop = Terminal:new({ cmd = "htop", hidden = true })
-
 function _HTOP_TOGGLE()
     htop:toggle()
 end
 
+-- python
 local python = Terminal:new({ cmd = "python", hidden = true })
-
 function _PYTHON_TOGGLE()
     python:toggle()
 end
