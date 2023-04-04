@@ -1,13 +1,15 @@
 # .dotfiles
 
 - ...
-- zsh
+- [zsh](zsh/.config/zsh)
 - tmux
 - [NeoVim](nvim/.config/nvim)
 
 <br/>
 
 ## Manage `dotfiles` using `stow`
+
+https://toabr.de/node/169
 
 **Clone the repo**
 
