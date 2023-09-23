@@ -1,6 +1,6 @@
 /* Rounded edges for panel https://forum.xfce.org/viewtopic.php?id=15163 */
 .xfce4-panel.horizontal{
-    border-radius: 15px;
+    border-radius: 0px;
 }
 
 /* xfce4-terminal window borders padding */

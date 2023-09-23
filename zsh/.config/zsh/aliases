@@ -1,6 +1,9 @@
 # vim editor
 alias nvim="/opt/nvim-linux64/bin/nvim"
 
+# force zsh to show the complete history
+alias h='history 0'
+
 # navigation
 alias ~="cd ~"
 alias -- -="cd -"
@@ -13,7 +16,7 @@ alias .....="cd ../../../.."
 alias l='ls -F1 --group-directories-first'
 alias la='ls -FA'
 alias ll='ls -Fahl'
-alias dot='cd ~/.dotfiles'
+alias dotfiles='cd ~/.dotfiles'
 
 # disk space
 alias dfh='df -h --output=source,fstype,size,used,avail,pcent,target -x tmpfs -x devtmpfs'
@@ -24,8 +27,6 @@ alias dud='du -hd 1'
 alias f.='find . -maxdepth 5 -type f -iname'
 # G pipe grep
 alias -g G=' | grep -i '
-# complete history
-alias h='history 0'
 
 # confirmation
 alias mkdir='mkdir -pv'
