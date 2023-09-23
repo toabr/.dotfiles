@@ -4,7 +4,7 @@
 
 local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
-  return
+    return
 end
 
 local components = {
@@ -17,7 +17,7 @@ local components = {
 
             local buf_client_names = {}
             for _, client in pairs(buf_clients) do
-              table.insert(buf_client_names, client.name)
+                table.insert(buf_client_names, client.name)
             end
 
             local unique_client_names = vim.fn.uniq(buf_client_names)
@@ -52,22 +52,32 @@ lualine.setup {
     },
     sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = {},
-        lualine_x = { components.lsp, components.spaces, "filetype" },
+        lualine_b = { "branch", "diff" },
+        lualine_c = {
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            { "filename", path = 1 },
+        },
+        lualine_x = { "diagnostics", components.lsp, components.spaces },
         lualine_y = { "location" },
         lualine_z = { components.progress },
     },
     winbar = {
-        lualine_a = { { "filename", path = 1 } },
-        lualine_b = {},
-        lualine_c = { "%=" },
+        lualine_a = { },
+        lualine_b = { },
+        lualine_c = {
+            { "filename", path = 0, separator = "" },
+            {
+                -- Code Breadcrumbs
+                function() return require("nvim-navic").get_location({ separator = " ", depth_limit = 5 }) end,
+                cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
+            },
+        },
         lualine_x = {},
         lualine_y = {},
         lualine_z = {}
     },
     inactive_winbar = {
-        lualine_a = { { "filename" , path = 1 } },
+        lualine_a = { { "filename", path = 1 } },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
@@ -77,5 +87,4 @@ lualine.setup {
 }
 
 vim.opt.showmode = false -- no -- INSERT anymore
-vim.opt.laststatus = 3 -- one liner in splits
-
+vim.opt.laststatus = 3   -- one liner in splits

@@ -84,6 +84,7 @@ return packer.startup(function(use)
     use 'williamboman/mason-lspconfig.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'jay-babu/mason-null-ls.nvim'
+    use 'SmiteshP/nvim-navic'
 
     -- treesitter
     use 'nvim-treesitter/nvim-treesitter'

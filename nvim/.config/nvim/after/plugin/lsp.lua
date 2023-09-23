@@ -61,6 +61,12 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
+
+    -- Code Breadcrumbs
+    local status_ok, navic = pcall(require, "nvim-navic")
+    if status_ok then
+        navic.attach(_, bufnr)
+    end
 end
 
 ----------------------------------------------------------------
