@@ -1,37 +1,54 @@
 # ~/.zshrc file for zsh interactive shells.
 # see /usr/share/doc/zsh/examples/zshrc for examples
 
-# set ZDOTDIR
-export ZDOTDIR=$HOME/.config/zsh
-export PATH="$HOME/.npm/bin:$PATH"
-
-# Functions
+# Load functions
 source "$ZDOTDIR/functions"
 
-# source files
+# Source files
 zsh_add_file "aliases"
+zsh_add_file "exports"
 zsh_add_file "prompt"
 
-# fzf
-[ -f ~/.config/zsh/fzf.zsh ] && source ~/.config/zsh/fzf.zsh
-
-# Download Plugins
+# Download plugins
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 zsh_add_plugin "zsh-users/zsh-history-substring-search"
 zsh_add_plugin "zsh-git-prompt/zsh-git-prompt"
 #zsh_add_plugin "jeffreytse/zsh-vi-mode"
 
+# == Plugin settings ==========================================================
 
-# zsh-history-substring-search
-if [ -f $ZDOTDIR/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
-    . $ZDOTDIR/zsh-history-substring-search/zsh-history-substring-search.zsh
+# auto-suggestions
+if [ -f $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    # change suggestion color
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
 fi
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+## enable vi mode plugin
+#if [ -f $ZDOTDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]; then
+#    . $ZDOTDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+#fi
+
+# zsh-history-substring-search
+if [ -f $ZDOTDIR/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
+
+    # better readability 
+    HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=magenta,fg=#000000,bold"
+fi
+
+# enable command-not-found if installed
+if [ -f /etc/zsh_command_not_found ]; then
+    . /etc/zsh_command_not_found
+fi
+
+# fzf
+[ -f ~/.config/zsh/fzf.zsh ] && source ~/.config/zsh/fzf.zsh
+
+# == zsh settings =============================================================
 
 setopt autocd              # change directory just by typing its name
 #setopt correct            # auto correct mistakes
@@ -121,23 +138,3 @@ if [ -x /usr/bin/dircolors ]; then
     zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
     zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 fi
-
-
-
-# enable auto-suggestions based on the history
-if [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    . /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    # change suggestion color
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#999'
-fi
-
-# enable command-not-found if installed
-if [ -f /etc/zsh_command_not_found ]; then
-    . /etc/zsh_command_not_found
-fi
-
-# enable vi mode plugin
-if [ -f $ZDOTDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]; then
-    . $ZDOTDIR/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-fi
-

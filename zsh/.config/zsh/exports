@@ -1,0 +1,5 @@
+# npm
+export PATH="$HOME/.npm/bin:$PATH"
+
+# cheat.sh config
+export CHTSH_CONF="~/.config/cht.sh/cht.sh.conf"
