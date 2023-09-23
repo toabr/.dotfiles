@@ -65,6 +65,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "startuptime",
     "tsplayground",
     "PlenaryTestPopup",
+    "netrw",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -79,5 +80,15 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
+  end,
+})
+
+-- custom tabstop settings per file type
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("custom_tabstop"),
+  pattern = { "html", "css", "scss" },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
   end,
 })

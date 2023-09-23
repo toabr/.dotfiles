@@ -46,7 +46,7 @@ return packer.startup(function(use)
     use 'folke/which-key.nvim'
     use 'echasnovski/mini.bufremove'
     use 'RRethy/vim-illuminate'
-    use { 'nvim-telescope/telescope.nvim', tag = '0.1.1' }
+    use 'nvim-telescope/telescope.nvim'
 
     -- Util ---------------------------------
     use 'nvim-lua/plenary.nvim'

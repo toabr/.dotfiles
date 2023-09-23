@@ -12,9 +12,10 @@ local configs = require "nvim-treesitter.configs"
 configs.setup {
   ensure_installed = {
     "bash",
-    "help",
+    -- "help",
     "html",
     "javascript",
+    "jsdoc",
     "json",
     "lua",
     "markdown",

@@ -19,6 +19,8 @@ telescope.setup {
             ".git/",
             "node_modules",
             ".parcel-cache",
+            ".cache",
+            "dist",
         },
 
         mappings = {

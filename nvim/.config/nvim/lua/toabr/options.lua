@@ -8,6 +8,7 @@ vim.cmd([[
 
 local opt = vim.opt
 -- files
+opt.backupcopy = "yes" -- for HotModuleReplacement
 opt.swapfile = false
 opt.undofile = true -- enable persistent undo
 opt.undodir = vim.fn.stdpath "cache" .. "/undo"
