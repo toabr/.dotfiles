@@ -18,8 +18,10 @@ set encoding=utf-8      " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 set hidden
 set noswapfile
-set undofile
+" create undodir
+call mkdir($HOME."/.vim/undo", "p", 0700)
 set undodir=$HOME/.vim/undo " needs to exist
+set undofile
 
 " style
 set background=dark
