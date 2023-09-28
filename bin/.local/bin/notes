@@ -1,0 +1,11 @@
+#!/bin/bash
+SESSION="Notes"
+
+cd ~/Notes/ || return
+
+if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+    tmux new -s "$SESSION" -d
+    tmux send "nvim -c Lexplore" Enter
+fi
+
+tmux a -t "$SESSION"
