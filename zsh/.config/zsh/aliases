@@ -1,9 +1,3 @@
-# vim editor
-alias nvim="/opt/nvim-linux64/bin/nvim"
-
-# force zsh to show the complete history
-alias h='history 0'
-
 # navigation
 alias ~="cd ~"
 alias -- -="cd -"
@@ -59,6 +53,9 @@ alias tldrf='tldr -l1 | fzf --preview "tldr {1}" --preview-window=right,70% | xa
 
 # Virtualbox VMs
 # alias docker-start='VBoxManage startvm docker --type=headless'
+
+# vim editor
+alias nvim="/opt/nvim-linux64/bin/nvim"
 
 # NeoVim config switch
 # git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/AstroNvim
