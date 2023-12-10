@@ -1,12 +1,18 @@
 # ~/.bashrc
 
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 # include .bash_aliases
-if [ -f "$HOME/.config/bash/.bash_aliases" ]; then
-  . "$HOME/.config/bash/.bash_aliases"
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
 fi
 # include .bash_prompt
-if [ -f "$HOME/.config/bash/.bash_prompt" ]; then
-  . "$HOME/.config/bash/.bash_prompt"
+if [ -f ~/.bash_prompt ]; then
+  . ~/.bash_prompt
 fi
 
 export HISTTIMEFORMAT="%F %T "
@@ -19,12 +25,6 @@ Kernel:    $(uname -r)
 Timezone:  $(cat /etc/timezone)
 Uptime:    $(uptime -p)
 "
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
