@@ -5,5 +5,5 @@
 
 /* xfce4-terminal window borders padding */
 VteTerminal, vte-terminal {
-    padding: 18px;
+    padding: 8px;
 }
