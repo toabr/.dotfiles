@@ -5,11 +5,11 @@ SNAME="💀"
 if ! tmux has-session -t $SNAME; then
   tmux new -s $SNAME -d
   tmux rename-window -t $SNAME home
-  tmux split-window -t $SNAME:1.1 -h -l 30%
-  tmux split-window -t $SNAME:1.1 -v -l 8
-  tmux send-keys -t $SNAME:1.3 \
-    'batcat --paging always $HOME/.local/tmux_cheatsheet' Enter
+  tmux split-window -t $SNAME:1.1 -v -l 50%
+  tmux split-window -t $SNAME:1.1 -h -l 35%
   tmux send-keys -t $SNAME:1.2 \
+    'batcat --paging always $HOME/.local/tmux_cheatsheet' Enter
+  tmux send-keys -t $SNAME:1.3 \
     'htop' Enter
   tmux send-keys -t $SNAME:1.1 \
     'neofetch --ascii_distro Xubuntu' Enter
