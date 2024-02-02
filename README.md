@@ -1,24 +1,53 @@
 # .dotfiles
 
-- ...
-- [zsh](zsh/.config/zsh)
-- tmux
-- [NeoVim](nvim/.config/nvim)
+**README:**
+
+- [zsh](zsh)
+- [tmux](tmux)
+- [vim](vim)
+- [NeoVim](nvim)
 
 <br/>
 
-## Manage `dotfiles` using `stow`
+## Manage dotfiles using `stow`
 
 https://toabr.de/node/169
 
-**Clone the repo**
+```
+sudo apt install stow
+```
 
-`git clone https://github.com/toabr/.dotfiles.git ~/.mydotfiles`
+### Clone the .dotfiles repo
 
-**Install Stow:**
+```
+cd ~ && git clone https://github.com/toabr/.dotfiles.git
+```
 
-`sudo apt install stow`
+### Stow configs
 
-**Cd into `.mydotfiles` and install nvim configs**
+```
+cd ~/.dotfiles
 
-`stow -Svt ~ nvim`
+# pay attention to your folder structure
+mkdir ~/.config/nvim
+
+stow -Svt ~ nvim
+```
+
+<br/>
+
+## Using [nix](https://nixos.org/)
+
+**Requirements:** git, curl, xz-utils, sudo
+
+### Download [nix package manager](https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation) 
+```
+curl -L https://nixos.org/nix/install | sh -s -- --daemon
+```
+
+### Run the install script
+
+```
+~/.dotfiles/install.sh
+```
+
