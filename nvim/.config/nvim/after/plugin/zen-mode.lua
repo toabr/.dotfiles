@@ -10,7 +10,7 @@ end
 zenmode.setup {
     window = {
         backdrop = 1,
-        width = 120,
+        width = .85,
         options = {
             signcolumn = "no", -- disable signcolumn
             number = false, -- disable number column
