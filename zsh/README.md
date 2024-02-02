@@ -14,24 +14,23 @@ https://toabr.de/node/165
 ## Install zsh on Ubuntu
 
 ```
-$ sudo apt install zsh
-$ chsh -s /usr/bin/zsh
+sudo apt install zsh
+
+# change users default login shell
+chsh -s /usr/bin/zsh
 ```
 
-### Stow zsh
+## Stow zsh config files
 
 ```
-$ mkdir ~/.config/zsh
-
-# from .dotfiles
-$ stow -Svt ~ zsh
+mkdir -p ~/.config/zsh && \
+  cd ~/.dotfiles && \
+  stow -Svt ~ zsh
 ```
 
-### Install fzf
+## Download [fzf](https://github.com/junegunn/fzf)
 
 ```
-$ mkdir ~/.local/bin
-
-$ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/bin/fzf
-~/.local/bin/fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.local/fzf && \
+  ~/.local/fzf/install --bin
 ```
