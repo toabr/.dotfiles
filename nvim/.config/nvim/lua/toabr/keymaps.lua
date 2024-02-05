@@ -33,12 +33,6 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
---[[ TODO: next and prev ]]
--- Buffer navigation
-map("n", "<leader>bb", "<cmd>e#<cr>", { desc = "other [b]uffer" })
-map("n", "<S-RIGHT>", "<cmd>bnext<cr>", opts)
-map("n", "<S-LEFT>", "<cmd>bprevious<cr>", opts)
-
 -- Better paste
 map("v", "p", '"_dP', opts)
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
@@ -81,13 +75,19 @@ map("n", "ä<cr>", ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { desc = "add
 
 -- LEADER --------------------------------------------------------------
 
+-- Buffer navigation
+map("n", "<leader>bb", "<cmd>e#<cr>", { desc = "other [b]uffer" })
+map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "[n]ext buffer" })
+map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "[p]revious buffer" })
+
 -- find / files
 map("n", "<leader>fe", "<cmd>Lexplore<cr>", { desc = "[e]xplorer" })
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "[n]ew" })
 
 -- window
 map("n", "<leader>ww", "<C-W>p", { desc = "s[w]itch" })
-map("n", "<leader>wq", "<C-W>c", { desc = "[q]uit" })
+map("n", "<leader>wq", "<C-W>q", { desc = "[q]uit" })
+map("n", "<leader>wc", "<C-W>c", { desc = "[c]lose" })
 map("n", "<leader>ws", "<C-W>s", { desc = "[s]plit" })
 map("n", "<leader>wv", "<C-W>v", { desc = "[v]ertical split" })
 

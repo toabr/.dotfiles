@@ -46,10 +46,12 @@ map("n", "<leader>xj", builtin.jumplist, { desc = "[j]ump list" })
 map("n", "<leader>xl", builtin.loclist, { desc = "[l]ocation list" })
 map("n", "<leader>xq", builtin.quickfix, { desc = "[q]uickfix list" })
 
--- find
-map("n", "<leader>fb", function()
+-- buffer list
+map("n", "<leader>bs", function()
     builtin.buffers(require('telescope.themes').get_dropdown({ previewer = false, }))
-end, { desc = "[b]uffers" })
+end, { desc = "[s]earch buffers" })
+
+-- find
 map('n', '<leader>ff', function()
     builtin.find_files(require('telescope.themes').get_dropdown({
         hidden = true,
