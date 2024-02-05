@@ -61,12 +61,11 @@ return packer.startup(function(use)
     -- use 'goolord/alpha-nvim'
 
     -- Colorschemes -------------------------
-    use 'arcticicestudio/nord-vim'
-    use 'navarasu/onedark.nvim'
+    use 'sainnhe/everforest'
     use 'folke/tokyonight.nvim'
     use 'catppuccin/nvim'
-    -- use 'sainnhe/everforest'
-    use '/home/c3to/Desktop/everforest'
+    use 'arcticicestudio/nord-vim'
+    use 'navarasu/onedark.nvim'
 
     -- cmp ----------------------------------
     use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
