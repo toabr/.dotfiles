@@ -36,12 +36,12 @@ configure_prompt() {
     prompt_symbol=⚡
     [ "$EUID" -eq 0 ] && prompt_symbol=💀
     
-    host_style="green"
+    host_style="black"
     [ "$SSH_TTY" ] && host_style="blue"
 
     # Default values for the appearance of the prompt. Configure at will.
-    ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}["
-    ZSH_THEME_GIT_PROMPT_SUFFIX="%F{green}]"
+    ZSH_THEME_GIT_PROMPT_PREFIX="%B%F{$host_style}[%b"
+    ZSH_THEME_GIT_PROMPT_SUFFIX="%B%F{$host_style}]%b"
     ZSH_THEME_GIT_PROMPT_HASH_PREFIX=":"
     ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
     ZSH_THEME_GIT_PROMPT_BRANCH="%F{reset}"
@@ -51,12 +51,12 @@ configure_prompt() {
     ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%2G%}"
     ZSH_THEME_GIT_PROMPT_BEHIND_AHEAD_SEPARATOR=""
     ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%2G%}"
-    ZSH_THEME_GIT_PROMPT_STASHED="%{$fg_bold[blue]%}%{⚑%G%}"
+    ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[blue]%}%{⚑%G%}"
     ZSH_THEME_GIT_PROMPT_UNTRACKED="%{…%G%}"
-    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}%{✔%G%}"
+    ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
     ZSH_THEME_GIT_PROMPT_LOCAL=" L"
     # The remote branch will be shown between these two
-    ZSH_THEME_GIT_PROMPT_UPSTREAM_FRONT=" {%{$fg_bold[blue]%}"
+    ZSH_THEME_GIT_PROMPT_UPSTREAM_FRONT=" {%{$fg[blue]%}"
     ZSH_THEME_GIT_PROMPT_UPSTREAM_END="%{${reset_color}%}}"
 
 
@@ -64,18 +64,21 @@ configure_prompt() {
         twoline)
             PROMPT=$'%F{white}%* ' # time
             PROMPT+=$'%F{%(#.blue.green)}${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}'
-            PROMPT+=$'%B%F{%(#.red.$host_style)}%n' # username
-            PROMPT+=$'%F{white}$prompt_symbol' # seperator
-            PROMPT+=$'%F{%(#.red.$host_style)}%m ' # hostname
-            PROMPT+=$'%B%F{blue}%(6~.%-1~/…/%4~.%5~)%b ' # path
+            PROMPT+=$'%B%F{%(#.red.$host_style)}%n%b' # username
+            PROMPT+=$'$prompt_symbol' # seperator
+            PROMPT+=$'%B%F{%(#.red.$host_style)}%m%b' # hostname
+            PROMPT+=$'%F{white}:' # seperator
+            PROMPT+=$'%F{white}%(6~.%-1~/…/%4~.%5~) ' # path
             PROMPT+=$'$(git_super_status) ' # git prompt        
-            PROMPT+=$'\n%b%F{green}└─%B%(#.%F{red}#.%F{green}$)%b%F{reset} '
+            PROMPT+=$'\n%B%F{%(#.red.$host_style)}%{󰘍%G%} %b%F{reset}'
 
+            # Right-side prompt with exit codes and background processes
             RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
 
         oneline)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset}%(#.#.$) '
+            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}'
+            PROMPT=$'%F{white}%~%F{reset} %B%(#.#.⟩)%b '
             RPROMPT=
             ;;
 
@@ -89,7 +92,7 @@ configure_prompt() {
 # The following block is surrounded by two delimiters.
 # These delimiters must not be modified. Thanks.
 # START KALI CONFIG VARIABLES
-PROMPT_ALTERNATIVE=twoline
+PROMPT_ALTERNATIVE=oneline
 NEWLINE_BEFORE_PROMPT=yes
 # STOP KALI CONFIG VARIABLES
 
@@ -175,12 +178,8 @@ precmd() {
     # Print the previously configured title
     print -Pnr -- "$TERM_TITLE"
 
-    # Print a new line before the prompt, but only if it is not the first line
+    # Print a new line before the prompt
     if [ "$NEWLINE_BEFORE_PROMPT" = yes ]; then
-        if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
-            _NEW_LINE_BEFORE_PROMPT=1
-        else
-            print ""
-        fi
+        print ""
     fi
 }
