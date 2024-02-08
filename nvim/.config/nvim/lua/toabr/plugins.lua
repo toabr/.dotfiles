@@ -47,6 +47,7 @@ return packer.startup(function(use)
     use 'echasnovski/mini.bufremove'
     use 'RRethy/vim-illuminate'
     use 'nvim-telescope/telescope.nvim'
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Util ---------------------------------
     use 'nvim-lua/plenary.nvim'
