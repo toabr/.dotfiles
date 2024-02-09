@@ -41,7 +41,7 @@ set termguicolors
 set laststatus=2
 set number
 set relativenumber
-set signcolumn=yes   
+set signcolumn=auto   
 set listchars+=tab:→\ ,
 set listchars+=space:⸱,
 set listchars+=nbsp:␣,
@@ -142,29 +142,53 @@ augroup end
 " --------------------
 
 let mapleader="\<Space>"
+
 " open file explorer
 nnoremap <Leader>e :Lexplore<CR>
 " open terminal
 nnoremap <Leader>t :term<CR>
 " disables search highlighting
 nnoremap <Leader>h :nohlsearch<CR>
+
 " save & quit
 nnoremap <Leader>w :write<CR>
 nnoremap <Leader>q :quit<CR>
+
 " buffer
 nnoremap <Leader>b :ls<CR>
-nnoremap <Leader>c :bdelete<CR>
+nnoremap <Leader>c :bp\|bd #<CR>
+
 " undo redo
 nnoremap <C-Z> u
 nnoremap <C-Y> <C-R>
 inoremap <C-Z> <C-O>u
 inoremap <C-Y> <C-O><C-R>
-" windows
-nnoremap <Leader>v :vsplit<CR>
+
+" Move to window using the <ctrl> hjkl keys
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" resize windows
 nnoremap <C-Left> :vertical resize -2<CR>
 nnoremap <C-Right> :vertical resize +2<CR>
 nnoremap <C-Up> :resize -2<CR>
 nnoremap <C-Down> :resize +2<CR>
+
+" jump and center
+nnoremap <C-j> <C-d>zz
+nnoremap <C-k> <C-u>zz
+
+" better search
+nnoremap * *Nzz
+nnoremap # #Nzz
+nnoremap n nzz
+nnoremap N Nzz
+
+" stay in visual mode after indent
+vnoremap < <gv
+vnoremap > >gv
 
 " regex completion instead of whole word completion
 nnoremap <leader>f :find **/*
