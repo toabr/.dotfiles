@@ -78,7 +78,7 @@ configure_prompt() {
 
         oneline)
             PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}'
-            PROMPT=$'%F{white}%~%F{reset} %B%(#.#.⟩)%b '
+            PROMPT=$'%F{white}%~%F{reset} %B%(#.#.❯)%b '
             RPROMPT=
             ;;
 
