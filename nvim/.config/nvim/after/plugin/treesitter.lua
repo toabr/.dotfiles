@@ -31,18 +31,14 @@ configs.setup {
   sync_install = false,
   auto_install = true,
   ignore_install = { "" },
-  highlight = {
-    enable = true,
-    disable = { "" },
-    additional_vim_regex_highlighting = false,
-  },
+  highlight = { enable = true },
   indent = { enable = true },
   incremental_selection = {
     enable = true,
     keymaps = {
       init_selection = "<cr>",
       node_incremental = "<cr>",
-      scope_incremental = "<nop>",
+      scope_incremental = false,
       node_decremental = "<bs>",
     },
   },

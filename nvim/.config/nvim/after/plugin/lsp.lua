@@ -41,11 +41,11 @@ local on_attach = function(_, bufnr)
     nmap('<leader>la', vim.lsp.buf.code_action, '[a]ction')
     nmap('<leader>lr', vim.lsp.buf.rename, '[r]ename')
     nmap('<leader>lF', vim.lsp.buf.format, '[F]oramt')
-    nmap('<leader>ld', builtin.lsp_dynamic_workspace_symbols, '[d]ynamic Symbols')
+    nmap('<leader>lD', builtin.lsp_dynamic_workspace_symbols, '[d]ynamic Symbols')
 
-    nmap('<leader>sd', builtin.diagnostics, '[d]iagnostics')
-    nmap('<leader>ss', builtin.lsp_document_symbols, '[s]ymbols (document)')
-    nmap('<leader>sS', builtin.lsp_workspace_symbols, '[S]ymbols (workspace)')
+    nmap('<leader>ld', builtin.diagnostics, '[d]iagnostics')
+    nmap('<leader>ls', builtin.lsp_document_symbols, '[s]ymbols (document)')
+    nmap('<leader>lS', builtin.lsp_workspace_symbols, '[S]ymbols (workspace)')
 
 
     -- See `:help K` for why this keymap

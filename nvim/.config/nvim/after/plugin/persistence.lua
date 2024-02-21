@@ -10,9 +10,9 @@ end
 --     return
 -- end
 
-vim.keymap.set('n', "<leader>qs", function() require("persistence").load() end, { desc = "restore [s]ession" })
-vim.keymap.set('n', "<leader>ql", function() require("persistence").load({ last = true }) end, { desc = "[l]ast session" })
-vim.keymap.set('n', "<leader>qd", function() require("persistence").stop() end, { desc = "[d]on't save" })
+vim.keymap.set('n', "<leader>ss", function() require("persistence").load() end, { desc = "restore [s]ession" })
+vim.keymap.set('n', "<leader>sl", function() require("persistence").load({ last = true }) end, { desc = "[l]ast session" })
+vim.keymap.set('n', "<leader>sd", function() require("persistence").stop() end, { desc = "[d]on't save current session" })
 
 require('persistence').setup {
   event = "BufReadPre", -- this will only start session saving when an actual file was opened
