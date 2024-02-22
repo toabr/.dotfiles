@@ -78,6 +78,7 @@ end
 local servers = {
     html = {},
     tsserver = {},
+    marksman = {},
     lua_ls = {
         Lua = {
             diagnostics = { globals = { 'vim' } },
