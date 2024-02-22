@@ -64,6 +64,12 @@ telescope.setup {
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true,    -- override the file sorter
             case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+        },
+        emoji = {
+            action = function(emoji)
+                vim.fn.setreg("+", emoji.value)
+                print([[Press p or "+p to paste this emoji]] .. emoji.value)
+            end,
         }
     }
 }
@@ -71,6 +77,7 @@ telescope.setup {
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
+require("telescope").load_extension("emoji")
 
 -------------------------------------------------------------------------
 -- mappings
@@ -115,6 +122,9 @@ map('n', '<leader>ff', function()
         previewer = false,
     }))
 end, { desc = '[f]iles' })
+
+-- emojis 😁
+map('n', '<leader>fe', '<cmd>Telescope emoji<cr>', { desc = '[e]mojis' })
 
 -- buffers
 map("n", "<leader>fb", function()

@@ -48,6 +48,7 @@ return packer.startup(function(use)
     use 'RRethy/vim-illuminate'
     use 'nvim-telescope/telescope.nvim'
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use 'xiyaowong/telescope-emoji.nvim'
 
     -- Util ---------------------------------
     use 'nvim-lua/plenary.nvim'
