@@ -23,7 +23,7 @@ chsh -s /usr/bin/zsh
 ## Stow zsh config files
 
 ```
-mkdir -p ~/.config/zsh && \
+mkdir -p ~/.config/zsh/plugins && \
   cd ~/.dotfiles && \
   stow -Svt ~ zsh
 ```
