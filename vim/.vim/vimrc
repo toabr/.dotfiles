@@ -64,7 +64,7 @@ set nowrap
 "set path+=**        " include subdirectorys
 set wildmenu
 set wildmode=list:full
-set wildignorecase   " ignore case for completion
+"set wildignorecase   " this option breakes NETRW in Termux
 set wildignore=node_modules/**,.git/**
 set ignorecase
 set smartcase
@@ -143,12 +143,15 @@ augroup end
 
 let mapleader="\<Space>"
 
+" easy prompt access for termux
+nnoremap <Leader><Leader> :
+
 " open file explorer
 nnoremap <Leader>e :Lexplore<CR>
 " open terminal
 nnoremap <Leader>t :term<CR>
 " disables search highlighting
-nnoremap <Leader>h :nohlsearch<CR>
+nnoremap <Esc> :nohlsearch<CR>
 
 " save & quit
 nnoremap <Leader>w :write<CR>
