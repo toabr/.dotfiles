@@ -1,20 +1,17 @@
--- reloads neovim on save
-vim.cmd([[
-  augroup vimrc_reload
-    autocmd!
-    autocmd BufWritePost options.lua source % | echom "Reloaded options.lua" | redraw
-  augroup end
-]])
+----------------------------------------------------------------
+-- Options
+----------------------------------------------------------------
 
 local opt = vim.opt
+
 -- files
 opt.backupcopy = "yes" -- for HotModuleReplacement
 opt.swapfile = false
 opt.undofile = true -- enable persistent undo
 opt.undodir = vim.fn.stdpath "cache" .. "/undo"
 -- better dont confuse clipboards ...
--- vim.opt.clipboard = "unnamedplus" -- allows system clipboard
-opt.updatetime = 350
+--vim.opt.clipboard = "unnamedplus" -- allows system clipboard
+opt.updatetime = 250
 
 -- style
 opt.mouse = "a"
@@ -22,14 +19,17 @@ opt.completeopt = { "menu","menuone","noselect" }
 opt.number = true
 opt.relativenumber = false
 opt.signcolumn = "yes"
+opt.colorcolumn = "80"
 opt.cursorline = true
 opt.pumheight = 10 -- pop up menu height
 opt.timeoutlen = 800 -- wait for a mapped sequence
 opt.diffopt = 'vertical'
 opt.splitright = true
 opt.splitbelow = true
-opt.scrolloff = 5
+opt.inccommand = 'split'
+opt.scrolloff = 8
 opt.sidescrolloff = 8
+opt.confirm = true
 opt.wrap = false
 opt.guicursor = {
     "n-v-c-sm:block",
@@ -44,14 +44,15 @@ opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 opt.smartindent = true
+
 -- whitespace characters
 opt.list = true
 opt.listchars = {
     tab = '→ ',
-    lead = '⸱',
-    trail = '⸱',
-    -- space = '.',
-    -- eol = '↵',
+    --lead = '·',
+    trail = '·',
+    --space = '.',
+    --eol = '↵',
     precedes = '←',
     extends = '→',
     nbsp = '␣',
@@ -67,4 +68,3 @@ opt.wildignore = {
     'node_modules/**',
     '.git/**',
 }
-
