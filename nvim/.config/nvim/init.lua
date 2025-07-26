@@ -1,5 +1,5 @@
-require('toabr.options')
-require('toabr.keymaps')
-require('toabr.lazy')
-require('toabr.autocmds')
+require('config.options')
+require('config.keymaps')
+require('config.autocmds')
+require('config.lazy')
 
