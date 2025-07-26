@@ -1,25 +1,14 @@
-local Util = require("config.util")
+----------------------------------------------------------------
+-- Key Mappings
+----------------------------------------------------------------
 
--- reloads neovim on save
-vim.cmd([[
-  augroup keymap_reload
-    autocmd!
-    autocmd BufWritePost keymap.lua source % | echom "Reloaded keymap.lua" | redraw
-  augroup end
-]])
-
--- Shorten function name
 local map = vim.keymap.set
--- Silent keymap option
 local opts = { noremap = true, silent = true }
 
 -- map space as leader key
 map("n", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
--- undo on z
-map("n", '<C-z>', 'u', { desc = "undo on ctrl-z"})
 
 -- keep paste buffer after paste
 map("x", "p", [["_dP]], opts)
@@ -62,50 +51,35 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
--- Quickly add empty lines
--- TODO: enter / ctrl-enter
--- also mapped by treesitter ..
-map("n", "ö<cr>", ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[", { desc = "add empty line above" })
-map("n", "ä<cr>", ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { desc = "add empty line below" })
-
 ------------------------------------------------------------------------
 -- LEADER KEY MAPPINGS
 ------------------------------------------------------------------------
 
 -- one key stroke
-map("n", "<leader>w", "<cmd>w<cr><esc>", { desc = "save file" })
-map("n", "<leader>e", "<cmd>Explore<cr>", { desc = "explorer" })
-map("n", "<leader>n", "<cmd>enew<cr>", { desc = "new file" })
-map("n", "<leader>q", "<cmd>quit<cr>", { desc = "quit" })
+-- map("n", "<leader>n", "<cmd>enew <bar> startinsert<cr>", { desc = "new" })
+-- map("n", "<leader>w", "<cmd>write<cr><esc>", { desc = "write" })
+-- map("n", "<leader>q", "<cmd>quit<cr>", { desc = "quit" })
+map("n", "<leader>.", "<cmd>Explore<cr>", { desc = "browse" })
 
 -- buffer navigation
-map("n", "<leader>bb", "<cmd>e#<cr>", { desc = "other [b]uffer" })
-map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "[n]ext buffer" })
-map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "[p]revious buffer" })
-
--- window
-map("n", "<leader>ww", "<C-W>p", { desc = "s[w]itch" })
-map("n", "<leader>wq", "<C-W>q", { desc = "[q]uit" })
-map("n", "<leader>wc", "<C-W>c", { desc = "[c]lose" })
-map("n", "<leader>ws", "<C-W>s", { desc = "[s]plit" })
-map("n", "<leader>wv", "<C-W>v", { desc = "[v]ertical split" })
+map("n", "<leader>bb", "<cmd>b#<cr>", { desc = "other [b]uffer" })
+map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "[n]ext" })
+map("n", "<leader>bp", "<cmd>bprevious<cr>", { desc = "[p]revious" })
+-- use 'echasnovski/mini.bufremove' instead
+-- map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "buffer [d]elete" })
 
 -- user interface
-map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "[d]ignostics"})
+--map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "[d]ignostics"})
+map("n", "<leader>ug", "<cmd>set scl=no<cr>", { desc = "[g]utter" })
 map("n", "<leader>ul", "<cmd>set list!<cr>", { desc = "[l]ist" })
 map("n", "<leader>un", "<cmd>set number!<cr>", { desc = "[n]umbers" })
 map("n", "<leader>ur", "<cmd>set relativenumber!<cr>", { desc = "[r]elative numbers" })
 map("n", "<leader>uR", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "[R]edraw" })
 map("n", "<leader>us", "<cmd>set spell!<cr>", { desc = "[s]pelling" })
 map("n", "<leader>uw", "<cmd>set wrap!<cr>", { desc = "[w]rap" })
-map("n", "<leader>uz", "<cmd>ZenMode<cr>", { desc = "[z]en" })
 
 -- fix lists
 map("n", "<leader>xm", "<cmd>messages<cr>", { desc = "[m]essages list" })
-
--- session
-map("n", "<leader>sq", "<cmd>qa<cr>", { desc = "[q]uit all" })
-map("n", "<leader>sQ", "<cmd>qa!<cr>", { desc = "[Q]uit all!" })
 
 -- specials
 map({"n", "v"}, "<leader><leader>y", [["+y]], { desc = "[y]ank to system" })
