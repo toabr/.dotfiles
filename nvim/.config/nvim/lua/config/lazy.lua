@@ -22,5 +22,6 @@ require("lazy").setup({
     { import = "plugins.colorschemes" },
     { import = "plugins.which-key" },
     { import = "plugins.gitsigns" },
+    { import = "plugins.telescope" },
     { "folke/todo-comments.nvim", opts = { signs = false } },
 })
