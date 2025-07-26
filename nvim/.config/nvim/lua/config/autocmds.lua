@@ -1,19 +1,18 @@
 ----------------------------------------------------------------
--- autocmds
+-- Auto Commands
 ----------------------------------------------------------------
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("toabr" .. name, { clear = true })
 end
 
--- reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
-
+-- -- reloads neovim on save options.lua
+-- vim.cmd([[
+--   augroup vimrc_reload
+--     autocmd!
+--     autocmd BufWritePost options.lua source <afile> | echom "Reloaded options.lua" | redraw
+--   augroup end
+-- ]])
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
