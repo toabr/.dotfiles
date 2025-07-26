@@ -18,5 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
     -- { import = "plugins" },
+    { import = "plugins.treesitter" },
     { "folke/todo-comments.nvim", opts = { signs = false } },
 })
