@@ -1,13 +1,10 @@
 --------------------------------------------------------------------------------
--- lewis6991/gitsigns.nvim
+-- http://github.com/lewis6991/gitsigns.nvim
 --------------------------------------------------------------------------------
 
-local status_ok, gitsigns = pcall(require, "gitsigns")
-if not status_ok then
-    return
-end
-
-gitsigns.setup {
+return {
+  "lewis6991/gitsigns.nvim",
+  opts = {
     signs = {
         add          = { text = '+' },
         change       = { text = '~' },
@@ -56,4 +53,5 @@ gitsigns.setup {
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
     end
+  }
 }

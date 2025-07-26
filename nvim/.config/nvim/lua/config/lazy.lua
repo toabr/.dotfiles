@@ -21,5 +21,6 @@ require("lazy").setup({
     { import = "plugins.treesitter" },
     { import = "plugins.colorschemes" },
     { import = "plugins.which-key" },
+    { import = "plugins.gitsigns" },
     { "folke/todo-comments.nvim", opts = { signs = false } },
 })
