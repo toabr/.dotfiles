@@ -1,11 +1,12 @@
---------------------------------------------------------------------------------
--- nvim-lualine/lualine.nvim
---------------------------------------------------------------------------------
+-------------------------------------------------------------------
+-- https://github.com/nvim-lualine/lualine.nvim
+-------------------------------------------------------------------
 
-local status_ok, lualine = pcall(require, "lualine")
-if not status_ok then
-    return
-end
+local M = {
+  "nvim-lualine/lualine.nvim",
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  enabled = false,
+}
 
 local components = {
     lsp = {
@@ -42,49 +43,51 @@ local components = {
     },
 }
 
-lualine.setup {
-    options = {
-        globalstatus = true,
-        icons_enabled = true,
-        theme = "auto",
-        component_separators = "|",
-        section_separators = "",
-    },
-    sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff" },
-        lualine_c = {
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1 },
+M.config = function()
+    require('lualine').setup({
+        options = {
+            globalstatus = true,
+            icons_enabled = true,
+            theme = "auto",
+            component_separators = "|",
+            section_separators = "",
         },
-        lualine_x = { "diagnostics", components.lsp, components.spaces },
-        lualine_y = { "location" },
-        lualine_z = { components.progress },
-    },
-    winbar = {
-        lualine_a = { },
-        lualine_b = { },
-        lualine_c = {
-            { "filename", path = 0, separator = "" },
-            {
-                -- Code Breadcrumbs
-                function() return require("nvim-navic").get_location({ separator = " ", depth_limit = 5 }) end,
-                cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
+        sections = {
+            lualine_a = { "mode" },
+            lualine_b = { "branch", "diff" },
+            lualine_c = { },
+            lualine_x = { },
+            lualine_y = { "location" },
+            lualine_z = { components.progress },
+        },
+        winbar = {
+            lualine_a = { },
+            lualine_b = { },
+            lualine_c = {
+                { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+                { "filename", path = 1, separator = "" },
+                {
+                    -- Code Breadcrumbs
+                    function() return require("nvim-navic").get_location({ separator = " ", depth_limit = 5 }) end,
+                    cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
+                },
             },
+            lualine_x = {},
+            lualine_y = {},
+            lualine_z = {}
         },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {}
-    },
-    inactive_winbar = {
-        lualine_a = { { "filename", path = 1 } },
-        lualine_b = {},
-        lualine_c = {},
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {}
-    },
-}
+        inactive_winbar = {
+            lualine_a = { { "filename", path = 1 } },
+            lualine_b = {},
+            lualine_c = {},
+            lualine_x = {},
+            lualine_y = {},
+            lualine_z = {}
+        },
+    })
+end
 
 vim.opt.showmode = false -- no -- INSERT anymore
 vim.opt.laststatus = 3   -- one liner in splits
+
+return M

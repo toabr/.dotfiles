@@ -20,6 +20,7 @@ require("lazy").setup({
     -- { import = "plugins" },
     { import = "plugins.treesitter" },
     { import = "plugins.colorschemes" },
+    { import = "plugins.lualine" },
     { import = "plugins.which-key" },
     { import = "plugins.gitsigns" },
     { import = "plugins.telescope" },
