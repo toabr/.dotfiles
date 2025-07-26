@@ -1,9 +1,4 @@
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-    return
-end
-
-local Util = require("toabr.util")
+local Util = require("config.util")
 
 -- reloads neovim on save
 vim.cmd([[
@@ -79,7 +74,7 @@ map("n", "ä<cr>", ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { desc = "add
 
 -- one key stroke
 map("n", "<leader>w", "<cmd>w<cr><esc>", { desc = "save file" })
-map("n", "<leader>e", "<cmd>Lexplore<cr>", { desc = "explorer" })
+map("n", "<leader>e", "<cmd>Explore<cr>", { desc = "explorer" })
 map("n", "<leader>n", "<cmd>enew<cr>", { desc = "new file" })
 map("n", "<leader>q", "<cmd>quit<cr>", { desc = "quit" })
 
