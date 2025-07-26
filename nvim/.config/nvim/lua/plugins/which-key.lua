@@ -2,58 +2,69 @@
 -- folke/which-key.nvim
 --------------------------------------------------------------------------------
 
-local status_ok, which_key = pcall(require, "which-key")
-if not status_ok then
-    return
-end
-
-local get_icon = require("toabr.util").get_icon
-
-local setup = {
-    key_labels = {
-        ["<space>"] = "_",
-        -- ["<cr>"] = "RET",
-        -- ["<tab>"] = "TAB",
-    },
-    icons = {
-        breadcrumb = "»",                  -- symbol used in the command line area that shows your active key combo
-        separator = get_icon("SlimArrow"), -- symbol used between a key and it's label
-        group = get_icon(),                -- symbol prepended to a group
-    },
-    window = {
-        border = "single",        -- none, single, double, shadow
-        position = "bottom",      -- bottom, top
-        margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
-        padding = { 2, 2, 3, 2 }, -- extra window padding [top, right, bottom, left]
-        winblend = 0,
-    },
-    layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 3,                    -- spacing between columns
-        align = "center",               -- align columns left, center or right
-    },
+return {
+	"folke/which-key.nvim",
+	--dependencies = { 'nvim-tree/nvim-web-devicons' },
+	event = "VeryLazy",
+	enabled = true,
+	opts = {
+		preset = "classic",
+		delay = 200,
+		triggers = {
+			{ "<leader>", mode = { "n", "v" } },
+			{ "g", mode = { "n", "v" } },
+			{ "z", mode = { "n", "v" } },
+		},
+		plugins = {
+			marks = true, -- shows a list of your marks on ' and `
+			registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+			spelling = {
+				enabled = false,
+				suggestions = 20,
+			},
+			presets = {
+				operators = false, -- adds help for operators like d, y, ...
+				motions = false, -- adds help for motions
+				text_objects = false, -- help for text objects triggered after entering an operator
+				windows = false, -- default bindings on <c-w>
+				nav = false, -- misc bindings to work with windows
+				z = true, -- bindings for folds, spelling and others prefixed with z
+				g = true, -- bindings for prefixed with g
+			},
+		},
+		replace = {
+			["<space>"] = "_",
+		},
+		icons = {
+			mappings = false,
+			breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+			separator = "➜",
+			group = "",
+			colors = false,
+		},
+		win = {
+            no_overlap = false,
+			height = { min = 5, max = 25 }, -- min and max height of the columns
+			-- padding = { 2, 2 },
+			border = "single",
+			wo = { winblend = 0 },
+		},
+		layout = {
+			--width = { min = 20, max = 50 }, -- min and max width of the columns
+			spacing = 3, -- spacing between columns
+		},
+		spec = {
+			{ "<leader><space>", group = "★ Special" },
+			{ "<leader>b", group = "󰓩 buffer" },
+			{ "<leader>f", group = " find" },
+			{ "<leader>g", group = "󰊢 git" },
+			{ "<leader>gh", group = "hunk" },
+			{ "<leader>l", group = " lsp" },
+			{ "<leader>s", group = "󱂬 session" },
+			{ "<leader>t", group = " terminal" },
+			{ "<leader>u", group = " ui" },
+			{ "<leader>x", group = "󰒺 fix" },
+			{ "g", group = "goto" },
+		},
+	},
 }
-
-local mappings = {
-    ["g"] = { name = "goto" },
-    ["]"] = { name = "next" },
-    ["["] = { name = "prev" },
-    ["<leader><space>"] = { name = get_icon("Star", 1) .. "Leader" },
-    ["<leader>b"] = { name = get_icon("Buffer", 1) .. "buffer" },
-    ["<leader>f"] = { name = get_icon("Find", 1) .. "find" },
-    ["<leader>g"] = { name = get_icon("Git", 1) .. "git" },
-    ["<leader>gh"] = { name = "hunk" },
-    ["<leader>l"] = { name = get_icon("LSP", 1) .. "lsp" },
-    ["<leader>s"] = { name = get_icon("Session", 1) .. "session" },
-    ["<leader>t"] = { name = get_icon("Terminal", 1) .. "terminal" },
-    ["<leader>u"] = { name = get_icon("Window", 1) .. "ui/toggle" },
-    ["<leader>w"] = { name = get_icon("Window", 1) .. "window" },
-    ["<leader>x"] = { name = get_icon("List", 1) .. "fix" },
-}
-
-which_key.setup(setup)
-which_key.register(mappings)
-
-vim.api.nvim_set_hl(0, "WhichKeyFloat", { ctermbg = 'black', ctermfg = 'black' })
-vim.api.nvim_set_hl(0, "WhichKeyBorder", { ctermbg = 'black', ctermfg = 'black' })
