@@ -64,7 +64,8 @@ set nowrap
 "set path+=**        " include subdirectorys
 set wildmenu
 set wildmode=list:full
-"set wildignorecase   " this option breakes NETRW in Termux
+" WARNING: this option breakes NETRW in Termux
+" set wildignorecase
 set wildignore=node_modules/**,.git/**
 set ignorecase
 set smartcase
@@ -152,6 +153,8 @@ nnoremap <Leader>e :Lexplore<CR>
 nnoremap <Leader>t :term<CR>
 " disables search highlighting
 nnoremap <Esc> :nohlsearch<CR>
+" HACK: mapping <esc> causes bizarre behaviour
+nnoremap <esc>^[ <esc>^[
 
 " save & quit
 nnoremap <Leader>w :write<CR>
