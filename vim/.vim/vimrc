@@ -4,9 +4,11 @@ source $VIMRUNTIME/defaults.vim
 " SOURCE VIMRC ON SAVE 
 " --------------------
 
-augroup vimrc
-  autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
-  autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+" source it and redraw, when vimrc is written
+augroup ReloadVimrc
+  autocmd!
+  " match symlink and target path
+  autocmd BufWritePost $MYVIMRC,~/.dotfiles/vim/.vim/vimrc source $MYVIMRC | redraw! | echom "vimrc reloaded ..." 
 augroup END
 
 " --------------------
