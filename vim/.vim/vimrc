@@ -149,8 +149,8 @@ let mapleader="\<Space>"
 " easy prompt access for termux
 nnoremap <Leader><Leader> :
 
-" open file explorer
-nnoremap <Leader>e :Lexplore<CR>
+" open file explorer netrw
+nnoremap <Leader>. :Explore<CR>
 " open terminal
 nnoremap <Leader>t :term<CR>
 " disables search highlighting
@@ -163,8 +163,10 @@ nnoremap <Leader>w :write<CR>
 nnoremap <Leader>q :quit<CR>
 
 " buffer
-nnoremap <Leader>b :ls<CR>
-nnoremap <Leader>c :bp\|bd #<CR>
+nnoremap <Leader>bb :b#<CR>
+nnoremap <Leader>bc :bp\|bd #<CR>
+nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>bn :bn<CR>
 
 " undo redo
 nnoremap <C-Z> u
