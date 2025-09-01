@@ -1,55 +1,70 @@
-source $VIMRUNTIME/defaults.vim
-
-" --------------------
-" SOURCE VIMRC ON SAVE 
-" --------------------
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+" Avoid side effects when it was already reset.
+if &compatible
+  set nocompatible
+endif
 
 " source it and redraw, when vimrc is written
 augroup ReloadVimrc
   autocmd!
   " match symlink and target path
-  autocmd BufWritePost $MYVIMRC,~/.dotfiles/vim/.vim/vimrc source $MYVIMRC | redraw! | echom "vimrc reloaded ..." 
+  autocmd BufWritePost $MYVIMRC,~/.dotfiles/vim/.vim/vimrc source $MYVIMRC | redraw! | echom "vimrc reloaded ..."
 augroup END
 
-" --------------------
-" BASIC SETTINGS
-" --------------------
+" close some special buffer with q
+augroup CloseWithQ
+  autocmd!
+  autocmd FileType help,netrw, nnoremap <buffer> q <cmd>close<cr>
+augroup END
 
-set mouse=a
+" -------------------------------------------------------
+"  OPTIONS
+" -------------------------------------------------------
+
+set mouse=a             " Mouse support
 set encoding=utf-8      " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
+set fileencodings=utf-8,latin1
 set hidden
+
 set noswapfile
 " create undodir
 call mkdir($HOME."/.vim/undo", "p", 0700)
 set undodir=$HOME/.vim/undo " needs to exist
 set undofile
 
-" MODE
-let &t_SI.="\e[5 q" "SI = INSERT mode
-let &t_SR.="\e[4 q" "SR = REPLACE mode
-let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
-"settings:
-"  1 -> blinking block
-"  2 -> solid block
-"  3 -> blinking underscore
-"  4 -> solid underscore
-"  5 -> blinking vertical bar
-"  6 -> solid vertical bar
+set backspace=indent,eol,start	" Backspace all characters
+set history=200         " keep 200 lines of command line history
+set nostartofline       " Do not jump to first character with page commands
+set scrolloff=8         " lines of context around the cursor
+
+" CURSOR
+let &t_SI.="\e[5 q"     " INSERT mode = blinking vertical bar
+let &t_SR.="\e[4 q"     " REPLACE mode = solid underscore
+let &t_EI.="\e[1 q"     " NORMAL mode (ELSE) = blinking block
 
 " STYLE
 set background=dark
 set termguicolors
 set laststatus=2
-set number
-set relativenumber
-set signcolumn=auto   
+set nonumber
+set norelativenumber
+set signcolumn=auto
+
 set listchars+=tab:→\ ,
-set listchars+=space:⸱,
-set listchars+=nbsp:␣,
-set listchars+=eol:↲,
+set listchars+=space:·,
+set listchars+=lead:·,
+set listchars+=trail:·,
 set listchars+=precedes:←,
 set listchars+=extends:→,
+set listchars+=nbsp:␣,
+set listchars+=eol:↲,
+
+set ruler               " show the cursor position all the time
+set showmatch           " Show matching brackets.
+set showmode            " Show the current mode in status line
+set showcmd             " display incomplete commands
 
 set splitright
 set splitbelow
@@ -61,9 +76,10 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set nowrap
+set textwidth=80
 
 " SEARCH
-"set path+=**        " include subdirectorys
+
 set wildmenu
 set wildmode=list:full
 " WARNING: this option breakes NETRW in Termux
@@ -74,9 +90,14 @@ set smartcase
 set hlsearch
 set showmatch
 
-" --------------------
-" STATUS LINE
-" --------------------
+" Do incremental searching when it's possible to timeout.
+if has('reltime')
+  set incsearch
+endif
+
+" -------------------------------------------------------
+"  STATUS LINE
+" -------------------------------------------------------
 
 "function! InsertStatuslineColor(mode)
 "  if a:mode == 'i'
@@ -113,22 +134,22 @@ set statusline+=\ %=              " align left
 set statusline+=\ C:%c            " current column
 set statusline+=\ L:%l/%L\ [%p%%] " line X of Y [%]
 
-" --------------------
-" Colorscheme
-" --------------------
+" -------------------------------------------------------
+"  COLORS & THEMES
+" -------------------------------------------------------
 
 " sainnhe/everforest
 "colorscheme everforest
 "let g:everforest_transparent_background = 2
 "hi StatusLine ctermfg=NONE
 
-" --------------------
-" NETRW FILE BROWSER
-" --------------------
+" -------------------------------------------------------
+"  NETRW FILE BROWSER
+" -------------------------------------------------------
 
 let g:netrw_browse_split=0
 let g:netrw_keepdir=1
-let g:netrw_banner=0
+let g:netrw_banner=1
 let g:netrw_liststyle= 3
 let g:netrw_fastbrowse= 2
 let g:netrw_winsize=-30
@@ -140,39 +161,44 @@ augroup AutoDeleteNetrwHiddenBuffers
   au FileType netrw setlocal bufhidden=wipe
 augroup end
 
-" --------------------
-" KEY MAPPING
-" --------------------
+" -------------------------------------------------------
+"  KEY MAPPINGS
+" -------------------------------------------------------
 
 let mapleader="\<Space>"
 
-" easy prompt access for termux
-nnoremap <Leader><Leader> :
-
 " open file explorer netrw
-nnoremap <Leader>. :Explore<CR>
+nnoremap <Leader>. <cmd>Explore<cr>
+
 " open terminal
-nnoremap <Leader>t :term<CR>
+nnoremap <Leader>t <cmd>term<cr>
+
 " disables search highlighting
-nnoremap <Esc> :nohlsearch<CR>
+nnoremap <Esc> <cmd>nohlsearch<cr>
+
+" keep paste buffer after pasting in visual mode
+xnoremap p "_dP
+
 " HACK: mapping <esc> causes bizarre behaviour
 nnoremap <esc>^[ <esc>^[
 
 " save & quit
-nnoremap <Leader>w :write<CR>
-nnoremap <Leader>q :quit<CR>
+nnoremap <Leader>w <cmd>write<cr>
+nnoremap <Leader>q <cmd>quit<cr>
+nnoremap <Leader>n <cmd>enew <bar> startinsert<cr>
 
 " buffer
-nnoremap <Leader>bb :b#<CR>
-nnoremap <Leader>bc :bp\|bd #<CR>
-nnoremap <Leader>bp :bp<CR>
-nnoremap <Leader>bn :bn<CR>
+nnoremap <Leader>bb <cmd>b#<cr>
+nnoremap <Leader>bp <cmd>bp<cr>
+nnoremap <Leader>bn <cmd>bn<cr>
+nnoremap <Leader>bd <cmd>bp\|bd#<cr>
 
-" undo redo
-nnoremap <C-Z> u
-nnoremap <C-Y> <C-R>
-inoremap <C-Z> <C-O>u
-inoremap <C-Y> <C-O><C-R>
+" UI toggles
+nnoremap <Leader>ul <cmd>set list!<cr>
+nnoremap <Leader>un <cmd>set number!<cr>
+nnoremap <Leader>ur <cmd>set relativenumber!<cr>
+nnoremap <Leader>us <cmd>set spell!<cr>
+nnoremap <Leader>uw <cmd>set wrap!<cr>
 
 " Move to window using the <ctrl> hjkl keys
 nnoremap <C-h> <C-w>h
@@ -181,10 +207,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " resize windows
-nnoremap <C-Left> :vertical resize -2<CR>
-nnoremap <C-Right> :vertical resize +2<CR>
-nnoremap <C-Up> :resize -2<CR>
-nnoremap <C-Down> :resize +2<CR>
+nnoremap <C-Left> <cmd>vertical resize -2<cr>
+nnoremap <C-Right> <cmd>vertical resize +2<cr>
+nnoremap <C-Up> <cmd>resize -2<cr>
+nnoremap <C-Down> <cmd>resize +2<cr>
 
 " jump and center
 nnoremap <C-j> <C-d>zz
@@ -204,5 +230,5 @@ vnoremap > >gv
 nnoremap <leader>f :find **/*
 " restrict the matching to files under the directory
 " of the current file, recursively
-nnoremap <leader>F :find <C-R>=expand('%:p:h').'/**/*'<CR>
+nnoremap <leader>F <cmd>find <C-R>=expand('%:p:h').'/**/*'<cr>
 
